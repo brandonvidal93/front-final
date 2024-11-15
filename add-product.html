@@ -1,0 +1,44 @@
+<!-- add-product.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Producto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Agregar Producto</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Catálogo</a></li>
+      <li><a href="add-product.html">Agregar Producto</a></li>
+    </ul>
+  </nav>
+  <form id="product-form">
+    <input type="text" id="name" placeholder="Nombre del producto" required>
+    <textarea id="description" placeholder="Descripción" required></textarea>
+    <input type="number" id="price" placeholder="Precio" required>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <script type="module" src="api.js"></script>
+  <script type="module">
+    import { addProduct } from './api.js';
+
+    document.getElementById('product-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newProduct = {
+        name: document.getElementById('name').value,
+        description: document.getElementById('description').value,
+        price: parseFloat(document.getElementById('price').value),
+      };
+      await addProduct(newProduct);
+      window.location.href = 'index.html'; // Redirige al catálogo
+    });
+  </script>
+</body>
+
+</html>

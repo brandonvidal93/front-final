@@ -60,3 +60,15 @@ window.deleteProduct = async (id) => {
   await deleteProduct(id);
   location.reload(); // Recarga la página para ver los cambios
 };
+
+// Guardar Formulario de agregar producto en base de datos
+document.getElementById('product-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const newProduct = {
+    name: document.getElementById('name').value,
+    description: document.getElementById('description').value,
+    price: parseFloat(document.getElementById('price').value),
+  };
+  await addProduct(newProduct);
+  window.location.href = 'index.html'; // Redirige al catálogo
+});
